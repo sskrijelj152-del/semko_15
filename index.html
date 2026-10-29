@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="bs" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semko Hub — Elektronika, PC Tuning & CS2</title>
+  <meta name="description" content="Zvanični lični tech & esports hub za Semka: praktična elektronika, CS2 & FACEIT, PC tuning i YouTube radionica.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-base: #030712;
+      --bg-surface: #0b1120;
+      --bg-surface-elevated: #111827;
+      --border-subtle: #1e293b;
+      --border-active: #00f0ff;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-cyan: #00f0ff;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --accent-red: #ef4444;
+      --accent-indigo: #6366f1;
+    }
+    html.light {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f1f5f9;
+      --border-subtle: #e2e8f0;
+      --border-active: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent-cyan: #0284c7;
+      --accent-amber: #d97706;
+      --accent-emerald: #059669;
+      --accent-red: #dc2626;
+      --accent-indigo: #4f46e5;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.6;
+      transition: background-color 0.25s, color 0.25s;
+      overflow-x: hidden;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    #scroll-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-cyan), #38bdf8, #2563eb);
+      width: 0%;
+      z-index: 9999;
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    header.navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background-color: rgba(3, 7, 18, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background-color 0.25s;
+    }
+    html.light header.navbar {
+      background-color: rgba(255, 255, 255, 0.85);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 24px;
+    }
+    .brand-wordmark {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-wordmark span.cyan {
+      color: var(--accent-cyan);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover {
+      color: var(--accent-cyan);
+    }
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-icon {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-icon:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+    .btn-primary {
+      background: var(--accent-cyan);
+      color: #030712;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s, transform 0.1s;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--border-active);
+      color: var(--accent-cyan);
+    }
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .section-tag {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-cyan);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+    .section-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      line-height: 1.6;
+    }
+    .grid-split {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 36px;
+      align-items: center;
+      margin-top: 24px;
+    }
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .kpi-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+    }
+    .kpi-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .art-frame {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: #020617;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .art-frame svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .crosshair-bench {
+      height: 180px;
+      background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+      border-radius: 8px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-subtle);
+      margin: 16px 0;
+    }
+    .crosshair-render {
+      position: relative;
+      width: 0;
+      height: 0;
+    }
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      border: 1px solid var(--accent-cyan);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 10000;
+    }
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--accent-cyan);
+      cursor: pointer;
+    }
+    @media (max-width: 900px) {
+      .grid-split {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .kpi-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="scroll-bar"></div>
+  <div id="toast"><i class="fa-solid fa-circle-check" style="color: var(--accent-cyan);"></i> <span id="toast-text">Kopirano!</span></div>
+
+  <!-- Header -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#intro" class="brand-wordmark">
+        <span class="cyan font-mono">SEMKO</span>
+        <span style="opacity: 0.3;">/</span>
+        <span style="font-size: 0.85rem; font-weight: 500; color: var(--text-muted);">Hub</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#intro" id="nav-about">O meni</a>
+        <a href="#struka" id="nav-etf">Elektronika & Lab</a>
+        <a href="#gaming" id="nav-cs2">CS2 & FACEIT</a>
+        <a href="#hardware" id="nav-rig">PC Setup</a>
+        <a href="#kontakt" id="nav-contact">YouTube & Kontakt</a>
+      </nav>
+
+      <div class="nav-controls">
+        <button class="btn-icon" onclick="toggleAudio()" title="Zvučni efekti">
+          <i class="fa-solid fa-volume-high" id="audio-icon" style="color: var(--accent-cyan);"></i>
+        </button>
+        <button class="btn-icon" onclick="toggleLanguage()" title="Promijeni jezik">
+          <span class="font-mono" id="lang-indicator">BS</span>
+        </button>
+        <button class="btn-icon" onclick="toggleTheme()" title="Promijeni temu">
+          <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Canvas Particles -->
+  <section id="intro" style="position: relative; overflow: hidden;">
+    <canvas id="particle-canvas" style="position: absolute; inset: 0; pointer-events: none; width: 100%; height: 100%; z-index: 0;"></canvas>
+    <div class="container" style="position: relative; z-index: 1;">
+      <div class="grid-split">
+        <div>
+          <div class="section-tag" id="hero-tag">BOSNA I HERCEGOVINA · ELEKTRONIKA & LAB · CS2 FACEIT LVL 3</div>
+          <h1 class="section-title" id="hero-title" style="font-size: 3rem; line-height: 1.15;">
+            Preciznost u krugu.<br>
+            <span style="color: var(--accent-cyan);">Hladna glava na meču.</span>
+          </h1>
+          <p class="section-desc" id="hero-lead" style="margin: 18px 0 28px; font-size: 1.05rem;">
+            Pozdrav, ja sam <strong>Semko</strong> iz Bosne i Hercegovine. Fokusiran na praktičnu elektroniku, dijagnostiku hardvera, sklapanje i tjuniranje bolesno brzih PC konfiguracija te takmičarski Counter-Strike 2 na FACEIT platformi. Bez praznih priča – samo ono što u praksi radi perfektno.
+          </p>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+            <button class="btn-primary" onclick="copyDiscord()">
+              <i class="fa-brands fa-discord"></i>
+              <span id="btn-copy-dc">Kopiraj Discord (semkotx2)</span>
+            </button>
+            <a href="https://youtube.com/@seminbro4471?si=F1kzqEvQlE9GFxKq" target="_blank" class="btn-secondary">
+              <i class="fa-brands fa-youtube" style="color: #ef4444;"></i>
+              <span>YouTube (@seminbro4471)</span>
+            </a>
+          </div>
+
+          <div style="display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+            <span><i class="fa-solid fa-gamepad" style="color: var(--accent-cyan);"></i> CS2 FACEIT Lvl 3</span>
+            <span>·</span>
+            <span><i class="fa-solid fa-bolt" style="color: var(--accent-amber);"></i> Hardware Tuning</span>
+            <span>·</span>
+            <span><i class="fa-solid fa-headphones" style="color: var(--accent-emerald);"></i> 64-smpl ASIO</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="art-frame">
+            <svg viewBox="0 0 540 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="540" height="360" fill="#090d16"/>
+              <circle cx="270" cy="180" r="140" fill="#0284c7" opacity="0.12"/>
+              <rect x="30" y="270" width="480" height="14" rx="3" fill="#1e293b"/>
+              <line x1="80" y1="284" x2="80" y2="350" stroke="#334155" stroke-width="6"/>
+              <line x1="460" y1="284" x2="460" y2="350" stroke="#334155" stroke-width="6"/>
+              <!-- PC Case -->
+              <rect x="50" y="100" width="95" height="170" rx="6" fill="#0f172a" stroke="#00f0ff" stroke-width="2"/>
+              <rect x="62" y="115" width="71" height="90" rx="4" fill="#030712"/>
+              <circle cx="97" cy="160" r="28" stroke="#00f0ff" stroke-width="2" stroke-dasharray="4 4"/>
+              <circle cx="97" cy="160" r="16" fill="#00f0ff" opacity="0.3"/>
+              <!-- Monitor -->
+              <rect x="170" y="70" width="260" height="160" rx="8" fill="#0b1120" stroke="#38bdf8" stroke-width="2"/>
+              <rect x="180" y="80" width="240" height="140" rx="4" fill="#030712"/>
+              <circle cx="300" cy="150" r="30" stroke="#00f0ff" stroke-width="1.5"/>
+              <line x1="300" y1="130" x2="300" y2="170" stroke="#00f0ff" stroke-width="1.5"/>
+              <line x1="280" y1="150" x2="320" y2="150" stroke="#00f0ff" stroke-width="1.5"/>
+              <text x="300" y="195" fill="#38bdf8" font-size="10" font-family="JetBrains Mono" text-anchor="middle">240Hz FAST IPS</text>
+              <rect x="290" y="230" width="20" height="40" fill="#1e293b"/>
+              <polygon points="260,270 340,270 320,265 280,265" fill="#334155"/>
+              <rect x="210" y="272" width="110" height="6" rx="2" fill="#475569"/>
+              <rect x="340" y="272" width="20" height="6" rx="3" fill="#00f0ff"/>
+            </svg>
+            <div style="padding: 16px; background: var(--bg-surface-elevated); border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace;">
+              <span style="color: var(--text-muted);">Status: <strong style="color: var(--accent-emerald);">Online u CS2</strong></span>
+              <span style="color: var(--accent-cyan);">eDPI 1000 · 1280x960</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Row -->
+      <div class="kpi-row">
+        <div>
+          <div class="kpi-val">1,020 <span style="font-size: 0.8rem; color: var(--text-muted);">ELO</span></div>
+          <div class="kpi-lbl">FACEIT Level 3 Competitive</div>
+        </div>
+        <div>
+          <div class="kpi-val">240 <span style="font-size: 0.8rem; color: var(--text-muted);">Hz</span></div>
+          <div class="kpi-lbl">Esports Refresh Rate Panel</div>
+        </div>
+        <div>
+          <div class="kpi-val">-25 <span style="font-size: 0.8rem; color: var(--text-muted);">CO</span></div>
+          <div class="kpi-lbl">Ryzen Curve Optimizer Undervolt</div>
+        </div>
+        <div>
+          <div class="kpi-val">100%</div>
+          <div class="kpi-lbl">Praktičan rad bez uštogljenosti</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CS2 & Gaming Section -->
+  <section id="gaming">
+    <div class="container">
+      <div class="section-tag">01. ESPORTS & REPERTOAR</div>
+      <h2 class="section-title">Gaming & Counter-Strike 2</h2>
+      <p class="section-desc">Primarno se puca Counter-Strike 2 na FACEIT-u. Uz to dolaze sportske igre za opuštanje i RP serveri s ekipom.</p>
+
+      <div class="grid-split" style="margin-top: 30px;">
+        <!-- Crosshair Workbench -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);"><i class="fa-solid fa-crosshairs" style="color: var(--accent-cyan);"></i> CS2 Nišan & Workbench</h3>
+            <span class="font-mono" style="font-size: 0.75rem; color: var(--text-muted);">Exec Kod</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Odaberi konfiguraciju i preuzmi kod za CS2 konzolu (~):</p>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;">
+            <button class="btn-icon" style="justify-content: center;" onclick="setCrosshair('cyan')">Semko Cyan</button>
+            <button class="btn-icon" style="justify-content: center;" onclick="setCrosshair('green')">Dot Green</button>
+            <button class="btn-icon" style="justify-content: center;" onclick="setCrosshair('white')">Ghost White</button>
+          </div>
+
+          <div class="crosshair-bench">
+            <div style="position: absolute; width: 90px; height: 90px; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.15);"></div>
+            <div style="position: absolute; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(0,240,255,0.25);"></div>
+            <div class="crosshair-render" id="ch-preview">
+              <div id="ch-top" style="position: absolute; left: -1px; bottom: 4px; width: 2px; height: 10px; background: #00f0ff; box-shadow: 0 0 2px #000;"></div>
+              <div id="ch-bottom" style="position: absolute; left: -1px; top: 4px; width: 2px; height: 10px; background: #00f0ff; box-shadow: 0 0 2px #000;"></div>
+              <div id="ch-left" style="position: absolute; right: 4px; top: -1px; width: 10px; height: 2px; background: #00f0ff; box-shadow: 0 0 2px #000;"></div>
+              <div id="ch-right" style="position: absolute; left: 4px; top: -1px; width: 10px; height: 2px; background: #00f0ff; box-shadow: 0 0 2px #000;"></div>
+              <div id="ch-dot" style="position: absolute; left: -2px; top: -2px; width: 4px; height: 4px; border-radius: 50%; background: #00f0ff; display: none;"></div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="ch-code" readonly value="cl_crosshairstyle 4; cl_crosshairsize 2; cl_crosshairgap -2; cl_crosshaircolor 4;" style="flex: 1; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted);">
+            <button class="btn-primary" onclick="copyCrosshairCode()" style="padding: 8px 14px; font-size: 0.8rem;">Kopiraj</button>
+          </div>
+        </div>
+
+        <!-- Reflex Reaction Drill -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);"><i class="fa-solid fa-bolt" style="color: var(--accent-amber);"></i> Aim Reflex Drill</h3>
+            <span class="font-mono" style="font-size: 0.75rem; color: var(--accent-amber);">5 Meta</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Klikni na metu čim se pojavi i provjeri brzinu refleksa u milisekundama:</p>
+
+          <div id="drill-box" style="position: relative; height: 180px; background: #030712; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: crosshair;" onclick="playClickSound()">
+            <button class="btn-primary" id="btn-start-drill" onclick="startReflexDrill(event)">Započni Reflex Test</button>
+            <div id="drill-target" style="display: none; position: absolute; width: 28px; height: 28px; border-radius: 50%; background: rgba(0,240,255,0.25); border: 2px solid #00f0ff; box-shadow: 0 0 12px #00f0ff; cursor: pointer;" onclick="hitTarget(event)"></div>
+            <div id="drill-score" style="display: none; text-align: center; font-family: 'JetBrains Mono', monospace;">
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-cyan);" id="drill-ms">215 ms</div>
+              <div style="font-size: 0.8rem; color: var(--accent-emerald);" id="drill-eval">⚡ FACEIT Tier Refleksi!</div>
+              <button class="btn-secondary" style="margin-top: 10px; font-size: 0.75rem; padding: 6px 12px;" onclick="startReflexDrill(event)">Ponovi</button>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);">
+            <span>EA Sports FC (Fudbal)</span>
+            <span>NBA 2K (Baskija)</span>
+            <span>FiveM RP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Electrical Engineering Section -->
+  <section id="struka">
+    <div class="container">
+      <div class="section-tag">02. ELEKTRONIKA & LAB</div>
+      <h2 class="section-title">Elektronika & Dijagnostika Sklopova</h2>
+      <p class="section-desc">Praktična elektronika i analiza: osnove strujnih kola, precizna mjerenja instrumentima, logika sklopova i otklanjanje kvarova.</p>
+
+      <div class="grid-split" style="margin-top: 30px;">
+        <!-- Interactive Circuit & Ohm's Law -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);"><i class="fa-solid fa-atom" style="color: var(--accent-cyan);"></i> Interaktivni Omov Zakon</h3>
+            <button class="btn-icon" id="btn-circuit-toggle" onclick="toggleCircuitSwitch()" style="padding: 4px 10px; font-size: 0.75rem;">
+              SW: UKLJUČENO
+            </button>
+          </div>
+
+          <!-- Circuit Diagram SVG -->
+          <div style="background: #020617; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+            <svg viewBox="0 0 460 140" style="width: 100%; height: auto;">
+              <rect x="30" y="20" width="400" height="100" rx="6" fill="none" stroke="#1e293b" stroke-width="4"/>
+              <rect id="flowing-wire" x="30" y="20" width="400" height="100" rx="6" fill="none" stroke="#00f0ff" stroke-width="2" stroke-dasharray="6 6"/>
+              
+              <!-- Battery DC Source -->
+              <rect x="18" y="55" width="24" height="30" rx="3" fill="#0f172a" stroke="#00f0ff" stroke-width="1.5"/>
+              <text x="30" y="74" fill="#00f0ff" font-size="10" font-family="JetBrains Mono" font-weight="bold" text-anchor="middle" id="svg-volt-txt">12V</text>
+              
+              <!-- Switch -->
+              <g transform="translate(230, 20)">
+                <circle cx="-20" cy="0" r="4" fill="#00f0ff"/>
+                <circle cx="20" cy="0" r="4" fill="#00f0ff"/>
+                <line id="svg-switch-line" x1="-20" y1="0" x2="20" y2="0" stroke="#00f0ff" stroke-width="3"/>
+              </g>
+
+              <!-- Resistor -->
+              <rect x="418" y="55" width="24" height="30" rx="3" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+              <text x="430" y="74" fill="#f59e0b" font-size="10" font-family="JetBrains Mono" font-weight="bold" text-anchor="middle" id="svg-res-txt">240Ω</text>
+
+              <!-- LED -->
+              <circle id="svg-led" cx="230" cy="120" r="14" fill="#00f0ff" opacity="0.8" stroke="#38bdf8" stroke-width="2"/>
+              <text x="230" y="124" fill="#ffffff" font-size="8" font-family="JetBrains Mono" text-anchor="middle">LED</text>
+            </svg>
+          </div>
+
+          <!-- Live Values -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; margin-bottom: 16px;">
+            <div style="background: var(--bg-surface-elevated); padding: 8px; border-radius: 6px; border: 1px solid var(--border-subtle);">
+              <div style="font-size: 0.7rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">STRUJA (I)</div>
+              <div style="font-size: 1.1rem; font-weight: 700; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace;" id="calc-current">50 mA</div>
+            </div>
+            <div style="background: var(--bg-surface-elevated); padding: 8px; border-radius: 6px; border: 1px solid var(--border-subtle);">
+              <div style="font-size: 0.7rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">SNAGA (P)</div>
+              <div style="font-size: 1.1rem; font-weight: 700; color: var(--accent-amber); font-family: 'JetBrains Mono', monospace;" id="calc-power">600 mW</div>
+            </div>
+            <div style="background: var(--bg-surface-elevated); padding: 8px; border-radius: 6px; border: 1px solid var(--border-subtle);">
+              <div style="font-size: 0.7rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">PAD NAPONA</div>
+              <div style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); font-family: 'JetBrains Mono', monospace;" id="calc-voltage">12 V</div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; margin-bottom: 4px;">
+                <span>Napon (U):</span>
+                <strong style="color: var(--accent-cyan);" id="lbl-v">12 V</strong>
+              </div>
+              <input type="range" min="1" max="24" value="12" id="rng-v" oninput="updateCircuit()">
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; margin-bottom: 4px;">
+                <span>Otpor (R):</span>
+                <strong style="color: var(--accent-amber);" id="lbl-r">240 Ω</strong>
+              </div>
+              <input type="range" min="20" max="1000" step="20" value="240" id="rng-r" oninput="updateCircuit()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Logic Gates Playground -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);"><i class="fa-solid fa-microchip" style="color: var(--accent-cyan);"></i> Logička Kola (Bulova algebra)</h3>
+            <span class="font-mono" style="font-size: 0.75rem; color: var(--text-muted);">Sklopovi</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Isprobaj osnovna logička kola i provjeri istinitosnu tablicu:</p>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 16px;">
+            <button class="btn-icon" style="justify-content: center;" onclick="setGate('AND')">AND</button>
+            <button class="btn-icon" style="justify-content: center;" onclick="setGate('OR')">OR</button>
+            <button class="btn-icon" style="justify-content: center;" onclick="setGate('XOR')">XOR</button>
+            <button class="btn-icon" style="justify-content: center;" onclick="setGate('NOT')">NOT</button>
+          </div>
+
+          <div style="background: #020617; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 18px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <span>Ulaz A:</span>
+              <button class="btn-icon" id="gate-in-a" onclick="toggleInputA()">1 (HIGH)</button>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;" id="row-in-b">
+              <span>Ulaz B:</span>
+              <button class="btn-icon" id="gate-in-b" onclick="toggleInputB()">0 (LOW)</button>
+            </div>
+            <div style="padding-top: 12px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+              <span>Izlaz (<span id="gate-name">AND</span>):</span>
+              <span id="gate-out" style="padding: 4px 12px; border-radius: 6px; font-weight: 700; background: rgba(0,240,255,0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);">0 (NEAKTIVNO)</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px; font-size: 0.8rem; color: var(--text-muted);">
+            💡 <strong>Logika:</strong> Kao i sa računarima – ako nešto ne radi, tražiš gdje je prekid dok ne popraviš.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hardware Setup & PC Bench -->
+  <section id="hardware">
+    <div class="container">
+      <div class="section-tag">03. HARDVER & PC TUNING</div>
+      <h2 class="section-title">Moja Mašina & Radionica</h2>
+      <p class="section-desc">Podešavanje BIOS krivi, memorijskih sub-tajminga i profesionalnog zvučnog interfejsa za čist zvuk bez distorzije.</p>
+
+      <div class="grid-split" style="margin-top: 30px;">
+        <div class="card">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 14px;">
+            <i class="fa-solid fa-server" style="color: var(--accent-cyan);"></i> Komponente & Podešavanja
+          </h3>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+            <div style="padding: 10px; background: var(--bg-surface-elevated); border-radius: 6px; border: 1px solid var(--border-subtle);">
+              <strong style="color: var(--accent-cyan);">CPU:</strong> AMD Ryzen 7 7800X3D (Curve Optimizer -25 all-core)
+            </div>
+            <div style="padding: 10px; background: var(--bg-surface-elevated); border-radius: 6px; border: 1px solid var(--border-subtle);">
+              <strong style="color: var(--accent-cyan);">GPU:</strong> NVIDIA GeForce RTX 4070 Super 12GB (Undervolt profil)
+            </div>
+            <div style="padding: 10px; background: var(--bg-surface-elevated); border-radius: 6px; border: 1px solid var(--border-subtle);">
+              <strong style="color: var(--accent-cyan);">RAM:</strong> 32GB DDR5 6000MHz CL30 (Zategnuti sub-timings)
+            </div>
+            <div style="padding: 10px; background: var(--bg-surface-elevated); border-radius: 6px; border: 1px solid var(--border-subtle);">
+              <strong style="color: var(--accent-cyan);">AUDIO:</strong> Focusrite Scarlett DAC + Shure mikrofon (ASIO 64 buffer)
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 10px;">
+            <i class="fa-solid fa-wind" style="color: var(--accent-cyan);"></i> Simulator Krive Ventilatora
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Pomjeri opterećenje CPU-a i provjeri dinamičko hlađenje:</p>
+
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; margin-bottom: 6px;">
+              <span>Opterećenje CPU-a:</span>
+              <strong style="color: var(--accent-cyan);" id="fan-load-lbl">35%</strong>
+            </div>
+            <input type="range" min="5" max="100" value="35" id="fan-load-rng" oninput="updateFanSimulator()">
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+            <div style="display: flex; justify-content: space-between; padding: 8px; background: var(--bg-surface-elevated); border-radius: 6px;">
+              <span style="color: var(--text-muted);">Temperatura:</span>
+              <strong style="color: var(--accent-emerald);" id="sim-temp">48 °C</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px; background: var(--bg-surface-elevated); border-radius: 6px;">
+              <span style="color: var(--text-muted);">Brzina Ventilatora:</span>
+              <strong style="color: var(--accent-cyan);" id="sim-rpm">985 RPM</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px; background: var(--bg-surface-elevated); border-radius: 6px;">
+              <span style="color: var(--text-muted);">Akustika:</span>
+              <strong style="color: var(--text-main);" id="sim-db">26 dB(A) · Tiho</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YouTube Section -->
+  <section id="youtube">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+        <div>
+          <div class="section-tag">04. VIDEO SADRŽAJ</div>
+          <h2 class="section-title">YouTube Radionica</h2>
+          <p class="section-desc">Klipovi sa kanala: testiranja hardvera, gejming sažeci i tehnički tutorijali.</p>
+        </div>
+        <a href="https://youtube.com/@seminbro4471?si=F1kzqEvQlE9GFxKq" target="_blank" class="btn-primary" style="background: #ef4444; color: #fff;">
+          <i class="fa-brands fa-youtube"></i> Posjeti @seminbro4471
+        </a>
+      </div>
+
+      <div class="art-frame" style="max-width: 900px; margin: 0 auto; aspect-ratio: 16/9;">
+        <iframe src="https://www.youtube.com/embed/BD5tllEg__4" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width: 100%; height: 100%; border: 0;"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Shoutbox Section -->
+  <section id="kontakt">
+    <div class="container">
+      <div class="section-tag">05. POVEZIVANJE</div>
+      <h2 class="section-title">Kontakt & Zajednica</h2>
+      <p class="section-desc">Ako hoćeš baciti partiju CS2 na FACEIT-u, popričati o hardveru ili ostaviti poruku:</p>
+
+      <div class="grid-split" style="margin-top: 30px;">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <!-- Discord card -->
+          <div class="card" style="border-color: rgba(99, 102, 241, 0.4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fa-brands fa-discord" style="font-size: 1.6rem; color: #6366f1;"></i>
+                <div>
+                  <h4 style="color: var(--text-main); font-weight: 700;">Discord</h4>
+                  <div class="font-mono" style="font-size: 0.8rem; color: var(--text-muted);">semkotx2</div>
+                </div>
+              </div>
+              <span class="font-mono" style="font-size: 0.75rem; color: var(--accent-emerald);">● Online</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Glavni kanal za mečeve i tehničke konsultacije.</p>
+            <button class="btn-primary" style="width: 100%; justify-content: center; background: #6366f1; color: #fff;" onclick="copyDiscord()">
+              <i class="fa-solid fa-copy"></i> Kopiraj Discord
+            </button>
+          </div>
+
+          <!-- YouTube Card -->
+          <div class="card" style="border-color: rgba(239, 68, 68, 0.4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fa-brands fa-youtube" style="font-size: 1.6rem; color: #ef4444;"></i>
+                <div>
+                  <h4 style="color: var(--text-main); font-weight: 700;">YouTube</h4>
+                  <div class="font-mono" style="font-size: 0.8rem; color: var(--text-muted);">@seminbro4471</div>
+                </div>
+              </div>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Zvanični klipovi i gameplay trenuci.</p>
+            <a href="https://youtube.com/@seminbro4471?si=F1kzqEvQlE9GFxKq" target="_blank" class="btn-primary" style="width: 100%; justify-content: center; background: #ef4444; color: #fff; text-decoration: none;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Otvori Kanal
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive Note / Shoutbox -->
+        <div class="card">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">
+            <i class="fa-solid fa-comments" style="color: var(--accent-cyan);"></i> Poruka za Semka
+          </h3>
+          
+          <form onsubmit="handlePostNote(event)" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
+            <input type="text" id="note-name" required placeholder="Tvoje Ime / Nickname" style="padding: 8px 12px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 6px; color: var(--text-main); font-size: 0.85rem;">
+            <textarea id="note-msg" required rows="2" placeholder="Napiši poruku, smoke savjet ili pozdrav..." style="padding: 8px 12px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 6px; color: var(--text-main); font-size: 0.85rem; resize: none;"></textarea>
+            <button type="submit" class="btn-primary" style="align-self: flex-end; padding: 8px 16px; font-size: 0.8rem;">Objavi Poruku</button>
+          </form>
+
+          <div id="notes-container" style="display: flex; flex-direction: column; gap: 8px; max-height: 180px; overflow-y: auto;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding: 30px 0; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-muted);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div>&copy; 2026 Semko Hub · Bosna i Hercegovina</div>
+      <button class="btn-icon" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="font-size: 0.75rem;">
+        <i class="fa-solid fa-arrow-up"></i> Vrh stranice
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    let audioCtx = null;
+    let audioMuted = false;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    function playClickSound() {
+      if (audioMuted) return;
+      initAudio();
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.04);
+      } catch(e){}
+    }
+
+    function playDinkSound() {
+      if (audioMuted) return;
+      initAudio();
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1800, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(2600, audioCtx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.15);
+      } catch(e){}
+    }
+
+    function toggleAudio() {
+      audioMuted = !audioMuted;
+      const icon = document.getElementById('audio-icon');
+      icon.className = audioMuted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high';
+      icon.style.color = audioMuted ? 'var(--text-muted)' : 'var(--accent-cyan)';
+      showToast(audioMuted ? 'Zvuk isključen' : 'Zvuk uključen');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').innerText = msg;
+      toast.style.display = 'flex';
+      setTimeout(() => { toast.style.display = 'none'; }, 2500);
+    }
+
+    function copyDiscord() {
+      playClickSound();
+      navigator.clipboard.writeText('semkotx2').then(() => {
+        showToast('Kopiran Discord: semkotx2');
+      });
+    }
+
+    function toggleTheme() {
+      playClickSound();
+      const html = document.documentElement;
+      html.classList.toggle('light');
+      const isLight = html.classList.contains('light');
+      document.getElementById('theme-icon').className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    }
+
+    let currentLang = 'bs';
+    function toggleLanguage() {
+      playClickSound();
+      currentLang = currentLang === 'bs' ? 'en' : 'bs';
+      document.getElementById('lang-indicator').innerText = currentLang.toUpperCase();
+      
+      if (currentLang === 'en') {
+        document.getElementById('nav-about').innerText = 'About';
+        document.getElementById('nav-etf').innerText = 'Electronics & Lab';
+        document.getElementById('nav-cs2').innerText = 'Gaming';
+        document.getElementById('nav-rig').innerText = 'Hardware';
+        document.getElementById('nav-contact').innerText = 'Contact';
+        document.getElementById('btn-copy-dc').innerText = 'Copy Discord (semkotx2)';
+      } else {
+        document.getElementById('nav-about').innerText = 'O meni';
+        document.getElementById('nav-etf').innerText = 'Elektronika & Lab';
+        document.getElementById('nav-cs2').innerText = 'CS2 & FACEIT';
+        document.getElementById('nav-rig').innerText = 'PC Setup';
+        document.getElementById('nav-contact').innerText = 'YouTube & Kontakt';
+        document.getElementById('btn-copy-dc').innerText = 'Kopiraj Discord (semkotx2)';
+      }
+    }
+
+    window.onscroll = function() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      document.getElementById('scroll-bar').style.width = scrolled + '%';
+    };
+
+    function setCrosshair(type) {
+      playClickSound();
+      const top = document.getElementById('ch-top');
+      const bottom = document.getElementById('ch-bottom');
+      const left = document.getElementById('ch-left');
+      const right = document.getElementById('ch-right');
+      const dot = document.getElementById('ch-dot');
+      const codeInput = document.getElementById('ch-code');
+
+      if (type === 'cyan') {
+        top.style.display = bottom.style.display = left.style.display = right.style.display = 'block';
+        dot.style.display = 'none';
+        [top, bottom, left, right].forEach(el => el.style.background = '#00f0ff');
+        codeInput.value = 'cl_crosshairstyle 4; cl_crosshairsize 2; cl_crosshairgap -2; cl_crosshaircolor 4;';
+      } else if (type === 'green') {
+        top.style.display = bottom.style.display = left.style.display = right.style.display = 'none';
+        dot.style.display = 'block';
+        dot.style.background = '#22c55e';
+        codeInput.value = 'cl_crosshairstyle 4; cl_crosshairsize 0; cl_crosshairdot 1; cl_crosshaircolor 1;';
+      } else if (type === 'white') {
+        top.style.display = bottom.style.display = left.style.display = right.style.display = 'block';
+        dot.style.display = 'none';
+        [top, bottom, left, right].forEach(el => el.style.background = '#ffffff');
+        codeInput.value = 'cl_crosshairstyle 4; cl_crosshairsize 2.5; cl_crosshairgap -2; cl_crosshaircolor 5; cl_crosshaircolor_r 255;';
+      }
+    }
+
+    function copyCrosshairCode() {
+      playClickSound();
+      const code = document.getElementById('ch-code').value;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('Kopiran CS2 kod u clipboard!');
+      });
+    }
+
+    let drillActive = false;
+    let drillHits = 0;
+    let targetBorn = 0;
+    let reactionTimes = [];
+
+    function startReflexDrill(e) {
+      e.stopPropagation();
+      playClickSound();
+      drillActive = true;
+      drillHits = 0;
+      reactionTimes = [];
+      document.getElementById('btn-start-drill').style.display = 'none';
+      document.getElementById('drill-score').style.display = 'none';
+      spawnTarget();
+    }
+
+    function spawnTarget() {
+      const box = document.getElementById('drill-box');
+      const target = document.getElementById('drill-target');
+      const w = box.clientWidth - 50;
+      const h = box.clientHeight - 50;
+      const rx = Math.floor(Math.random() * w) + 15;
+      const ry = Math.floor(Math.random() * h) + 15;
+      target.style.left = rx + 'px';
+      target.style.top = ry + 'px';
+      target.style.display = 'block';
+      targetBorn = performance.now();
+    }
+
+    function hitTarget(e) {
+      e.stopPropagation();
+      playDinkSound();
+      const rt = Math.round(performance.now() - targetBorn);
+      reactionTimes.push(rt);
+      drillHits++;
+
+      if (drillHits >= 5) {
+        document.getElementById('drill-target').style.display = 'none';
+        drillActive = false;
+        const avg = Math.round(reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length);
+        document.getElementById('drill-ms').innerText = avg + ' ms';
+        document.getElementById('drill-eval').innerText = avg < 250 ? '⚡ FACEIT Level 10 Refleksi!' : '🎯 Solidan Entry Fragger!';
+        document.getElementById('drill-score').style.display = 'block';
+      } else {
+        spawnTarget();
+      }
+    }
+
+    let circuitClosed = true;
+
+    function toggleCircuitSwitch() {
+      playClickSound();
+      circuitClosed = !circuitClosed;
+      document.getElementById('btn-circuit-toggle').innerText = circuitClosed ? 'SW: UKLJUČENO' : 'SW: ISKLJUČENO';
+      document.getElementById('flowing-wire').style.display = circuitClosed ? 'block' : 'none';
+      const switchLine = document.getElementById('svg-switch-line');
+      if (circuitClosed) {
+        switchLine.setAttribute('x2', '20');
+        switchLine.setAttribute('y2', '0');
+        switchLine.setAttribute('stroke', '#00f0ff');
+      } else {
+        switchLine.setAttribute('x2', '12');
+        switchLine.setAttribute('y2', '-16');
+        switchLine.setAttribute('stroke', '#ef4444');
+      }
+      updateCircuit();
+    }
+
+    function updateCircuit() {
+      const u = parseFloat(document.getElementById('rng-v').value);
+      const r = parseFloat(document.getElementById('rng-r').value);
+      document.getElementById('lbl-v').innerText = u + ' V';
+      document.getElementById('lbl-r').innerText = r + ' Ω';
+      document.getElementById('svg-volt-txt').textContent = u + 'V';
+      document.getElementById('svg-res-txt').textContent = r + 'Ω';
+
+      if (!circuitClosed) {
+        document.getElementById('calc-current').innerText = '0 mA';
+        document.getElementById('calc-power').innerText = '0 mW';
+        document.getElementById('calc-voltage').innerText = '0 V';
+        document.getElementById('svg-led').setAttribute('opacity', '0.1');
+        return;
+      }
+
+      const currentA = u / r;
+      const currentMa = Math.round(currentA * 1000 * 10) / 10;
+      const powerMw = Math.round(u * currentA * 1000 * 10) / 10;
+
+      document.getElementById('calc-current').innerText = currentMa + ' mA';
+      document.getElementById('calc-power').innerText = powerMw + ' mW';
+      document.getElementById('calc-voltage').innerText = u + ' V';
+
+      const opacity = Math.min(Math.max(currentMa / 50, 0.2), 1);
+      document.getElementById('svg-led').setAttribute('opacity', opacity);
+    }
+
+    let activeGate = 'AND';
+    let valA = 1;
+    let valB = 0;
+
+    function setGate(gate) {
+      playClickSound();
+      activeGate = gate;
+      document.getElementById('gate-name').innerText = gate;
+      document.getElementById('row-in-b').style.display = gate === 'NOT' ? 'none' : 'flex';
+      calcLogic();
+    }
+
+    function toggleInputA() {
+      playClickSound();
+      valA = valA === 1 ? 0 : 1;
+      document.getElementById('gate-in-a').innerText = valA === 1 ? '1 (HIGH)' : '0 (LOW)';
+      calcLogic();
+    }
+
+    function toggleInputB() {
+      playClickSound();
+      valB = valB === 1 ? 0 : 1;
+      document.getElementById('gate-in-b').innerText = valB === 1 ? '1 (HIGH)' : '0 (LOW)';
+      calcLogic();
+    }
+
+    function calcLogic() {
+      let out = 0;
+      if (activeGate === 'AND') out = (valA && valB) ? 1 : 0;
+      else if (activeGate === 'OR') out = (valA || valB) ? 1 : 0;
+      else if (activeGate === 'XOR') out = (valA !== valB) ? 1 : 0;
+      else if (activeGate === 'NOT') out = (!valA) ? 1 : 0;
+
+      const outEl = document.getElementById('gate-out');
+      outEl.innerText = out ? '1 (AKTIVNO)' : '0 (NEAKTIVNO)';
+      outEl.style.color = out ? 'var(--accent-cyan)' : 'var(--text-muted)';
+      outEl.style.borderColor = out ? 'var(--accent-cyan)' : 'var(--border-subtle)';
+    }
+
+    function updateFanSimulator() {
+      const load = parseInt(document.getElementById('fan-load-rng').value);
+      document.getElementById('fan-load-lbl').innerText = load + '%';
+
+      const temp = Math.round(36 + (load / 100) * 32);
+      const rpm = load < 20 ? 0 : Math.round(600 + (load / 100) * 1100);
+      const db = load < 20 ? 18 : Math.round(22 + (load / 100) * 14);
+
+      document.getElementById('sim-temp').innerText = temp + ' °C';
+      document.getElementById('sim-rpm').innerText = rpm === 0 ? '0 RPM (Potpuno tiho)' : rpm + ' RPM';
+      document.getElementById('sim-db').innerText = db + ' dB(A) · ' + (db < 22 ? 'Šapat' : 'Tiho');
+    }
+
+    const defaultNotes = [
+      { name: 'Tarik_CS', msg: 'Brat moj Semko, onaj clutch 1v3 na Inferno B sajtu se još prepričava! Svaka čast za stranicu.' },
+      { name: 'Mirza_ETF', msg: 'Objasnio Omov zakon i simulator bolje nego na vježbama haha! Pozdrav kolega.' },
+      { name: 'Dino_Gamer', msg: 'Preuzeo sam kod za cyan nišan, kida na FACEIT-u!' }
+    ];
+
+    function renderNotes() {
+      const container = document.getElementById('notes-container');
+      const saved = JSON.parse(localStorage.getItem('semko_notes') || 'null') || defaultNotes;
+      container.innerHTML = saved.map(n => `
+        <div style="padding: 8px 12px; background: var(--bg-surface-elevated); border-radius: 6px; border: 1px solid var(--border-subtle); font-size: 0.8rem;">
+          <strong style="color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace;">${n.name}:</strong>
+          <span style="color: var(--text-main);"> "${n.msg}"</span>
+        </div>
+      `).join('');
+    }
+
+    function handlePostNote(e) {
+      e.preventDefault();
+      playClickSound();
+      const name = document.getElementById('note-name').value.trim();
+      const msg = document.getElementById('note-msg').value.trim();
+      if (!name || !msg) return;
+
+      const saved = JSON.parse(localStorage.getItem('semko_notes') || 'null') || defaultNotes;
+      saved.unshift({ name, msg });
+      localStorage.setItem('semko_notes', JSON.stringify(saved));
+      renderNotes();
+      document.getElementById('note-name').value = '';
+      document.getElementById('note-msg').value = '';
+      showToast('Poruka zabilježena!');
+    }
+
+    // --- Interactive Particle Canvas ---
+    (function initParticles() {
+      const canvas = document.getElementById('particle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      let w = canvas.width = canvas.parentElement.clientWidth;
+      let h = canvas.height = canvas.parentElement.clientHeight;
+
+      window.addEventListener('resize', () => {
+        if (!canvas.parentElement) return;
+        w = canvas.width = canvas.parentElement.clientWidth;
+        h = canvas.height = canvas.parentElement.clientHeight;
+      });
+
+      const count = Math.min(Math.floor((w * h) / 11000), 50);
+      const pts = [];
+      for (let i = 0; i < count; i++) {
+        pts.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.45,
+          vy: (Math.random() - 0.5) * 0.45,
+          r: Math.random() * 1.5 + 1,
+          a: Math.random() * 0.4 + 0.2
+        });
+      }
+
+      const m = { x: -1000, y: -1000, r: 120 };
+      canvas.parentElement.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        m.x = e.clientX - rect.left;
+        m.y = e.clientY - rect.top;
+      });
+      canvas.parentElement.addEventListener('mouseleave', () => {
+        m.x = -1000;
+        m.y = -1000;
+      });
+
+      function loop() {
+        ctx.clearRect(0, 0, w, h);
+        const isL = document.documentElement.classList.contains('light');
+        const dColor = isL ? '2, 132, 199' : '56, 189, 248';
+        const lColor = isL ? '2, 132, 199' : '0, 240, 255';
+
+        for (let i = 0; i < pts.length; i++) {
+          const p = pts[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+
+          const dxm = m.x - p.x;
+          const dym = m.y - p.y;
+          const dm = Math.sqrt(dxm * dxm + dym * dym);
+          if (dm < m.r) {
+            const f = (m.r - dm) / m.r;
+            const ang = Math.atan2(dym, dxm);
+            p.x -= Math.cos(ang) * f * 1.6;
+            p.y -= Math.sin(ang) * f * 1.6;
+          }
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${dColor}, ${p.a})`;
+          ctx.fill();
+
+          for (let j = i + 1; j < pts.length; j++) {
+            const p2 = pts[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 110) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(${lColor}, ${(1 - dist / 110) * 0.18})`;
+              ctx.lineWidth = 0.75;
+              ctx.stroke();
+            }
+          }
+
+          if (dm < m.r) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(m.x, m.y);
+            ctx.strokeStyle = `rgba(${lColor}, ${(1 - dm / m.r) * 0.28})`;
+            ctx.lineWidth = 0.9;
+            ctx.stroke();
+          }
+        }
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+
+    // Initialize
+    updateCircuit();
+    calcLogic();
+    updateFanSimulator();
+    renderNotes();
+  </script>
+</body>
+</html>
